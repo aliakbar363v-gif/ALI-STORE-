@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ali Store — Pakistan's digital marketplace for creative services, digital products and permitted gaming services.">
+  <title>Ali Store | Pakistan Digital Marketplace</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-icon">A</span><span>Ali Store<small>Pakistan Digital Marketplace</small></span></a>
+  <nav><button id="loginOpen" class="btn ghost">Login / Sign up</button><button id="logoutBtn" class="btn ghost hidden">Logout</button><button id="postOpen" class="btn primary">＋ Post an Ad</button></nav>
+</header>
+<main>
+  <section class="hero"><div class="eyebrow">MADE FOR PAKISTAN 🇵🇰</div><h1>Buy. Sell. <span>Discover.</span></h1><p>Explore digital products, gaming services and creative work from one place.</p>
+    <form id="searchForm" class="search"><input id="searchInput" placeholder="Search ads, products or services..." aria-label="Search ads"><button class="btn primary">Search</button></form>
+    <div id="connectionStatus" class="status">Demo mode: add your Supabase keys in config.js to enable online login and shared listings.</div>
+  </section>
+  <section class="section"><div class="section-title"><div><h2>Explore categories</h2><p>Choose a category to filter listings.</p></div></div>
+    <div class="categories">
+      <button class="category" data-category="Social Media"><span>📱</span><b>Social Media</b><small>Permitted pages and services</small></button>
+      <button class="category" data-category="Gaming"><span>🎮</span><b>Gaming</b><small>Gaming items and services</small></button>
+      <button class="category" data-category="Digital Products"><span>🧩</span><b>Digital Products</b><small>Templates and digital files</small></button>
+      <button class="category" data-category="Services"><span>🎨</span><b>Creative Services</b><small>Design, editing and more</small></button>
+    </div>
+  </section>
+  <section class="section" id="adsSection"><div class="section-title"><div><h2>Latest ads</h2><p>Community listings in PKR.</p></div><span id="resultCount" class="muted"></span></div>
+    <div class="filters"><button class="filter active" data-filter="All">All ads</button><button class="filter" data-filter="Social Media">Social Media</button><button class="filter" data-filter="Gaming">Gaming</button><button class="filter" data-filter="Digital Products">Digital Products</button><button class="filter" data-filter="Services">Services</button></div>
+    <div id="listingGrid" class="listing-grid"><div class="loading">Loading listings…</div></div>
+    <div id="emptyState" class="empty hidden">No listings found. Try a different search or post the first ad.</div>
+  </section>
+  <section class="safety"><b>Stay safe</b><p>Never share passwords, recovery codes or OTPs. Listings for stolen accounts, pirated content, scams or transfers prohibited by a platform/game's rules are not allowed. Verify a seller before paying.</p></section>
+</main>
+<footer>© <span id="year"></span> Ali Store <span>Independent marketplace; not affiliated with listed platforms or games.</span></footer>
+
+<div class="backdrop hidden" id="authModal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="authHeading"><button class="x" data-close="authModal">×</button><h2 id="authHeading">Welcome to Ali Store</h2><p class="muted">Create an account or sign in with your email.</p>
+  <div class="tabs"><button class="tab active" data-auth-mode="login">Login</button><button class="tab" data-auth-mode="signup">Sign up</button></div>
+  <form id="authForm"><label>Email<input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label><label>Password<input id="authPassword" type="password" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label><button id="authSubmit" class="btn primary full">Login</button></form><p id="authMessage" class="message" role="status"></p><p class="fineprint">Use a unique password. Email confirmation may be required by your Supabase settings.</p>
+</section></div>
+<div class="backdrop hidden" id="adModal"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="adHeading"><button class="x" data-close="adModal">×</button><h2 id="adHeading">Post an ad</h2><p class="muted">Sign in first. Listings are saved online when Supabase is configured.</p>
+  <form id="adForm"><label>Ad title<input id="adTitle" maxlength="80" required placeholder="e.g. YouTube thumbnail design"></label><div class="two-col"><label>Category<select id="adCategory" required><option>Services</option><option>Gaming</option><option>Digital Products</option><option>Social Media</option></select></label><label>Price (PKR)<input id="adPrice" type="number" min="0" max="99999999" required placeholder="500"></label></div><label>Description<textarea id="adDescription" maxlength="1000" required placeholder="Describe the item or service. Do not include passwords or OTPs."></textarea></label><label>City (optional)<input id="adCity" maxlength="60" placeholder="e.g. Karachi"></label><button class="btn primary full">Publish ad</button></form><p id="adMessage" class="message" role="status"></p>
+</section></div>
+<div class="toast hidden" id="toast" role="status"></div>
+</body></html>
